@@ -38,6 +38,12 @@ export default defineConfig(({ mode }) => ({
           },
           {
             src: 'placeholder.svg',
+            sizes: '192x192',
+            type: 'image/svg+xml',
+            purpose: 'any maskable'
+          },
+          {
+            src: 'placeholder.svg',
             sizes: '512x512',
             type: 'image/svg+xml',
             purpose: 'any maskable'
