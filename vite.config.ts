@@ -11,6 +11,11 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
     allowedHosts: ["consistency-yu4i.onrender.com"],
   },
+  preview: {
+    host: "::",
+    port: 8080,
+    allowedHosts: ["consistency-yu4i.onrender.com"],
+  },
   plugins: [
     react(),
     mode === "development" && componentTagger(),
