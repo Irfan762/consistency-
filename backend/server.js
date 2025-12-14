@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 
 const taskRoutes = require('./routes/tasks');
 const hackathonRoutes = require('./routes/hackathons');
@@ -26,6 +27,7 @@ mongoose.connect(MONGO_URI)
 initScheduler();
 
 // Routes
+// IMPORTANT: API routes must be defined BEFORE static files to avoid conflicts
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/hackathons', hackathonRoutes);
@@ -40,9 +42,13 @@ app.post('/api/notifications/test', async (req, res) => {
     }
 });
 
-// Base route
-app.get('/', (req, res) => {
-    res.send('Hackathon Hero Backend is running');
+// Serve static files from the React frontend app
+const buildPath = path.join(__dirname, '../dist');
+app.use(express.static(buildPath));
+
+// Anything that doesn't match an API route, send back the frontend index.html
+app.get('*', (req, res) => {
+    res.sendFile(path.join(buildPath, 'index.html'));
 });
 
 // Start Server
