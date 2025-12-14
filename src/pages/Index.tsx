@@ -30,7 +30,6 @@ import { isToday } from 'date-fns';
 
 const Index = () => {
   const [activeView, setActiveView] = useState('dashboard');
-  console.log('Rendering Index. Active View:', activeView);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [hackathons, setHackathons] = useState<Hackathon[]>([]);
   const [dailyStats] = useState(generateDailyStats());

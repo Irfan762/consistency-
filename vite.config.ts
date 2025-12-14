@@ -9,12 +9,12 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    allowedHosts: ["consistency-yu4i.onrender.com"],
+    allowedHosts: ["consistency-yu4i.onrender.com", "consistency-bvqd.onrender.com"],
   },
   preview: {
     host: "::",
     port: 8080,
-    allowedHosts: ["consistency-yu4i.onrender.com"],
+    allowedHosts: ["consistency-yu4i.onrender.com", "consistency-bvqd.onrender.com"],
   },
   plugins: [
     react(),
