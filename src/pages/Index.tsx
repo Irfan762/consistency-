@@ -366,7 +366,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Sidebar activeView={activeView} onViewChange={setActiveView} />
 
-      <main className="pl-20 lg:pl-[260px] transition-all duration-300">
+      <main className="pl-20 lg:pl-[280px] transition-all duration-300">
         <Header
           onAddTask={handleAddTask}
           onOpenSearch={() => setSearchOpen(true)}

@@ -39,14 +39,19 @@ export function SettingsView({
     toast.success('Logged out successfully');
   };
 
-  // ... existing handleNotificationToggle ...
   const handleNotificationToggle = (key: string, value: boolean) => {
     onUpdateNotifications(key, value);
   };
 
   return (
     <div className="space-y-6">
-      {/* ... header ... */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
+        <p className="text-muted-foreground mt-1">Manage your account and preferences.</p>
+      </motion.div>
 
       <div className="grid gap-6 max-w-2xl">
         <motion.div
@@ -54,35 +59,36 @@ export function SettingsView({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <Card className="overflow-hidden border-none shadow-md">
-            <div className="h-24 bg-gradient-to-r from-violet-600 to-indigo-600 relative">
-              <div className="absolute -bottom-8 left-6">
-                <div className="w-20 h-20 rounded-full border-4 border-background bg-zinc-100 flex items-center justify-center text-3xl font-bold text-violet-700 shadow-sm">
+          <Card className="glass-card overflow-hidden border-none shadow-xl ring-1 ring-white/20">
+            <div className="h-32 bg-gradient-to-r from-primary to-purple-600 relative overflow-hidden">
+              <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
+              <div className="absolute -bottom-10 left-8">
+                <div className="w-24 h-24 rounded-2xl border-4 border-background bg-card flex items-center justify-center text-4xl font-bold text-primary shadow-lg">
                   {user?.name?.charAt(0).toUpperCase() || 'U'}
                 </div>
               </div>
             </div>
-            <CardHeader className="pt-10 pb-4">
+            <CardHeader className="pt-16 pb-4 px-8">
               <div className="flex justify-between items-start">
                 <div>
-                  <CardTitle className="text-2xl font-bold">{user?.name || 'User Name'}</CardTitle>
-                  <CardDescription className="text-sm">{user?.email || 'user@example.com'}</CardDescription>
+                  <CardTitle className="text-3xl font-bold">{user?.name || 'User Name'}</CardTitle>
+                  <CardDescription className="text-base">{user?.email || 'user@example.com'}</CardDescription>
                 </div>
-                <Button variant="outline" size="sm" onClick={handleLogout} className="text-destructive hover:bg-destructive/10 hover:text-destructive gap-2">
+                <Button variant="outline" onClick={handleLogout} className="text-destructive hover:bg-destructive/10 hover:text-destructive gap-2 border-destructive/20">
                   <Trash2 className="w-4 h-4" />
                   Sign Out
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="px-8 pb-8 space-y-4">
               <div className="grid grid-cols-2 gap-4 text-sm mt-2">
-                <div className="p-3 bg-muted/50 rounded-lg">
-                  <p className="text-muted-foreground text-xs font-semibold uppercase">Account Type</p>
-                  <p className="font-medium mt-1">Hackathon Hero</p>
+                <div className="p-4 bg-muted/50 rounded-xl border border-border/50">
+                  <p className="text-muted-foreground text-xs font-semibold uppercase tracking-wider">Account Type</p>
+                  <p className="font-bold mt-1 text-lg">Hackathon Hero</p>
                 </div>
-                <div className="p-3 bg-muted/50 rounded-lg">
-                  <p className="text-muted-foreground text-xs font-semibold uppercase">Member Since</p>
-                  <p className="font-medium mt-1">{new Date().getFullYear()}</p>
+                <div className="p-4 bg-muted/50 rounded-xl border border-border/50">
+                  <p className="text-muted-foreground text-xs font-semibold uppercase tracking-wider">Member Since</p>
+                  <p className="font-bold mt-1 text-lg">{new Date().getFullYear()}</p>
                 </div>
               </div>
             </CardContent>
@@ -94,10 +100,10 @@ export function SettingsView({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Card>
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                {isDark ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+                {isDark ? <Moon className="w-5 h-5 text-primary" /> : <Sun className="w-5 h-5 text-primary" />}
                 Appearance
               </CardTitle>
               <CardDescription>
@@ -105,9 +111,9 @@ export function SettingsView({
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 transition-colors">
                 <div className="space-y-0.5">
-                  <Label htmlFor="dark-mode">Dark Mode</Label>
+                  <Label htmlFor="dark-mode" className="text-base">Dark Mode</Label>
                   <p className="text-sm text-muted-foreground">
                     Switch between light and dark themes
                   </p>
@@ -122,15 +128,16 @@ export function SettingsView({
           </Card>
         </motion.div>
 
+        {/* ... Notifications and Data Management Cards upgraded similarly ... */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <Card>
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Bell className="w-5 h-5" />
+                <Bell className="w-5 h-5 text-primary" />
                 Notifications
               </CardTitle>
               <CardDescription>
@@ -138,9 +145,9 @@ export function SettingsView({
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 transition-colors">
                 <div className="space-y-0.5">
-                  <Label htmlFor="daily-reminder">Daily Task Reminder</Label>
+                  <Label htmlFor="daily-reminder" className="text-base">Daily Task Reminder</Label>
                   <p className="text-sm text-muted-foreground">
                     Get reminded about pending tasks each morning
                   </p>
@@ -152,9 +159,9 @@ export function SettingsView({
                 />
               </div>
               <Separator />
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 transition-colors">
                 <div className="space-y-0.5">
-                  <Label htmlFor="hackathon-alerts">Hackathon Alerts</Label>
+                  <Label htmlFor="hackathon-alerts" className="text-base">Hackathon Alerts</Label>
                   <p className="text-sm text-muted-foreground">
                     Receive alerts before hackathon deadlines
                   </p>
@@ -166,9 +173,9 @@ export function SettingsView({
                 />
               </div>
               <Separator />
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 transition-colors">
                 <div className="space-y-0.5">
-                  <Label htmlFor="browser-notifications">Browser Notifications</Label>
+                  <Label htmlFor="browser-notifications" className="text-base">Browser Notifications</Label>
                   <p className="text-sm text-muted-foreground">
                     Enable push notifications in your browser
                   </p>
@@ -209,15 +216,18 @@ export function SettingsView({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          <Card>
+          <Card className="glass-card">
             <CardHeader>
-              <CardTitle>Data Management</CardTitle>
+              <CardTitle className="text-primary flex items-center gap-2">
+                <Download className="w-5 h-5" />
+                Data Management
+              </CardTitle>
               <CardDescription>
                 Export or clear your data
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 transition-colors">
                 <div className="space-y-0.5">
                   <p className="font-medium">Export Data</p>
                   <p className="text-sm text-muted-foreground">
@@ -230,43 +240,7 @@ export function SettingsView({
                 </Button>
               </div>
               <Separator />
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <p className="font-medium">Test Email Notification</p>
-                  <p className="text-sm text-muted-foreground">
-                    Trigger a test email digest (requires backend config)
-                  </p>
-                  {user?.email && (
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Will send to: {user.email} (if configured)
-                    </p>
-                  )}
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={async () => {
-                    try {
-                      // Using direct fetch to avoid import issues in this view
-                      const res = await fetch('http://localhost:5001/api/notifications/test', {
-                        method: 'POST'
-                      });
-                      if (res.ok) {
-                        toast.success('Email trigger sent (check backend logs)');
-                      } else {
-                        throw new Error('Failed');
-                      }
-                    } catch (err) {
-                      console.error('Test Email Error:', err);
-                      toast.error('Failed to trigger email. Check console for details.');
-                    }
-                  }}
-                >
-                  Send Email
-                </Button>
-              </div>
-              <Separator />
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 transition-colors">
                 <div className="space-y-0.5">
                   <p className="font-medium text-destructive">Clear All Data</p>
                   <p className="text-sm text-muted-foreground">

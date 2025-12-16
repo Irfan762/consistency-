@@ -25,10 +25,10 @@ interface ProgressChartsProps {
 }
 
 const COLORS = {
-  primary: 'hsl(190, 90%, 50%)',
-  success: 'hsl(160, 84%, 39%)',
-  warning: 'hsl(38, 92%, 50%)',
-  muted: 'hsl(220, 14%, 92%)',
+  primary: 'hsl(250, 95%, 64%)',
+  success: 'hsl(150, 90%, 35%)',
+  warning: 'hsl(35, 95%, 55%)',
+  muted: 'hsl(215, 16%, 47%)',
 };
 
 export function ProgressCharts({ dailyStats, weeklyProgress, completedTasks, pendingTasks }: ProgressChartsProps) {
@@ -44,7 +44,7 @@ export function ProgressCharts({ dailyStats, weeklyProgress, completedTasks, pen
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        <Card>
+        <Card className="glass-card">
           <CardHeader className="pb-2">
             <CardTitle className="text-base font-medium">Daily Completion</CardTitle>
           </CardHeader>
@@ -52,13 +52,13 @@ export function ProgressCharts({ dailyStats, weeklyProgress, completedTasks, pen
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={dailyStats}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
-                <XAxis 
-                  dataKey="date" 
+                <XAxis
+                  dataKey="date"
                   axisLine={false}
                   tickLine={false}
                   tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }}
                 />
-                <YAxis 
+                <YAxis
                   axisLine={false}
                   tickLine={false}
                   tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }}
@@ -83,7 +83,7 @@ export function ProgressCharts({ dailyStats, weeklyProgress, completedTasks, pen
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <Card>
+        <Card className="glass-card">
           <CardHeader className="pb-2">
             <CardTitle className="text-base font-medium">Weekly Progress</CardTitle>
           </CardHeader>
@@ -91,13 +91,13 @@ export function ProgressCharts({ dailyStats, weeklyProgress, completedTasks, pen
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={weeklyProgress}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
-                <XAxis 
-                  dataKey="week" 
+                <XAxis
+                  dataKey="week"
                   axisLine={false}
                   tickLine={false}
                   tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }}
                 />
-                <YAxis 
+                <YAxis
                   axisLine={false}
                   tickLine={false}
                   tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }}
@@ -111,10 +111,10 @@ export function ProgressCharts({ dailyStats, weeklyProgress, completedTasks, pen
                   }}
                   formatter={(value: number) => [`${value}%`, 'Completion Rate']}
                 />
-                <Line 
-                  type="monotone" 
-                  dataKey="completionRate" 
-                  stroke={COLORS.primary} 
+                <Line
+                  type="monotone"
+                  dataKey="completionRate"
+                  stroke={COLORS.primary}
                   strokeWidth={3}
                   dot={{ fill: COLORS.primary, strokeWidth: 0 }}
                   activeDot={{ r: 6, fill: COLORS.primary }}
@@ -130,7 +130,7 @@ export function ProgressCharts({ dailyStats, weeklyProgress, completedTasks, pen
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
-        <Card>
+        <Card className="glass-card">
           <CardHeader className="pb-2">
             <CardTitle className="text-base font-medium">Task Status</CardTitle>
           </CardHeader>
@@ -157,8 +157,8 @@ export function ProgressCharts({ dailyStats, weeklyProgress, completedTasks, pen
                     borderRadius: '8px',
                   }}
                 />
-                <Legend 
-                  verticalAlign="bottom" 
+                <Legend
+                  verticalAlign="bottom"
                   height={36}
                   formatter={(value) => <span className="text-sm text-foreground">{value}</span>}
                 />
